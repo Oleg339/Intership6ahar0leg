@@ -2,9 +2,7 @@
 
 namespace Amasty\BaharOleg\Controller\Index;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Index extends \Magento\Framework\App\Action\Action implements HttpGetActionInterface
+class Index extends \Magento\Framework\App\Action\Action
 {
     public function execute()
     {
