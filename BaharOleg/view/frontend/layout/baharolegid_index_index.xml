@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_BaharOleg::css/style.css" rel="stylesheet" type="test/css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="Amasty_BaharOleg" htmlTag="div" htmlClass="container-add-form">
+            <block name="Amasty_BaharOleg.hello" template="Amasty_BaharOleg::Hello.phtml">
+            </block>
+            <block name="Amasty_BaharOleg.form"
+                   class="Amasty\BaharOleg\Block\Form" template="Amasty_BaharOleg::Form.phtml">
+                <arguments>
+                    <argument name="css_class_form" xsi:type="string">margin-center</argument>
+                </arguments>
+                <block name="Amasty_BaharOleg.additional" template="Amasty_BaharOleg::Additional.phtml"/>
+            </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>
