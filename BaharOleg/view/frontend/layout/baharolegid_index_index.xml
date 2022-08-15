@@ -8,14 +8,13 @@
     <body>
         <referenceContainer name="content">
             <container name="Amasty_BaharOleg" htmlTag="div" htmlClass="container-add-form">
-            <block name="Amasty_BaharOleg.hello" template="Amasty_BaharOleg::Hello.phtml">
-            </block>
+            <block name="Amasty_BaharOleg.hello" class="Amasty\BaharOleg\Block\Hello" template="Amasty_BaharOleg::hello.phtml"/>
             <block name="Amasty_BaharOleg.form"
-                   class="Amasty\BaharOleg\Block\Form" template="Amasty_BaharOleg::Form.phtml">
+                   class="Amasty\BaharOleg\Block\Form" template="Amasty_BaharOleg::form.phtml">
                 <arguments>
                     <argument name="css_class_form" xsi:type="string">margin-center</argument>
                 </arguments>
-                <block name="Amasty_BaharOleg.additional" template="Amasty_BaharOleg::Additional.phtml"/>
+                <block name="Amasty_BaharOleg.additional" template="Amasty_BaharOleg::additional.phtml"/>
             </block>
             </container>
         </referenceContainer>

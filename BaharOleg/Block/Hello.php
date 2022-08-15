@@ -4,7 +4,8 @@ namespace Amasty\BaharOleg\Block;
 use Amasty\BaharOleg\Model\Config\ConfigProvider;
 use Magento\Framework\View\Element\Template;
 
-class Form extends Template
+
+class Hello extends Template
 {
     /**
      * @var \Amasty\BaharOleg\Model\Config\ConfigProvider;
@@ -22,10 +23,8 @@ class Form extends Template
         $this->configProvider = $configProvider;
     }
 
-    public function isShowQtyField(){
-        return $this->configProvider->getIsShowQtyField();
-    }
-    public function getQtyValue(){
-        return $this->configProvider->getQtyValue();
+    public function GetWelcomeText(): string
+    {
+        return $this->configProvider->getWelcomeText();
     }
 }

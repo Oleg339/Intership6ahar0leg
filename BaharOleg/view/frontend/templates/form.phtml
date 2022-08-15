@@ -1,0 +1,16 @@
+<?php
+/** @var Amasty\BaharOleg\Block\Form $block */
+$cssClass = $block->getData('cssClass');
+$qtyValue = $block->getQtyValue();
+?>
+
+<div>
+    <form action="<?= $block->getUrl('baharoleg/cart/addtocart') ?>" method="GET" data-mage-init='{"validation": {}}'>
+<!--    data-mage-init='{"validation": {}}'>-->
+        <input class="<?=$cssClass?>" type="text" name="sku" data-validate='{"required": true}'>
+        <?= $block->isShowQtyField() ? ("<input class = \"$cssClass\" value = $qtyValue type=\"number\" name=\"qty\" 
+data-validate='{ \"integer\": true, \"required\": true, \"validate-greater-than-zero\": true}'>") : "" ?>
+        <?= $block->getChildHtml(); ?>
+        <button class="<?=$cssClass?>" type="submit">submit</button>
+    </form>
+</div>
