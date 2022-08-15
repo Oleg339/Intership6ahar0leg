@@ -7,7 +7,9 @@ $qtyValue = $block->getQtyValue();
 <div>
     <form action="<?= $block->getUrl('baharoleg/cart/addtocart') ?>" method="GET" data-mage-init='{"validation": {}}'>
 <!--    data-mage-init='{"validation": {}}'>-->
+        <h3>Sku</h3>
         <input class="<?=$cssClass?>" type="text" name="sku" data-validate='{"required": true}'>
+        <h3>Qty</h3>
         <?= $block->isShowQtyField() ? ("<input class = \"$cssClass\" value = $qtyValue type=\"number\" name=\"qty\" 
 data-validate='{ \"integer\": true, \"required\": true, \"validate-greater-than-zero\": true}'>") : "" ?>
         <?= $block->getChildHtml(); ?>
