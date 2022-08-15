@@ -54,8 +54,8 @@ class AddToCart implements ActionInterface
     )
     {
         $this->resultFactory=$resultFactory;
-        $this->checkoutSession = $checkoutSession;
-        $this->productRepository = $productRepository;
+        $this->checkoutSession=$checkoutSession;
+        $this->productRepository=$productRepository;
         $this->configProvider=$configProvider;
         $this->messageManager=$messageManager;
         $this->request=$request;
