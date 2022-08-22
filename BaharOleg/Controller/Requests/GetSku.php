@@ -46,15 +46,15 @@ class GetSku implements ActionInterface
 
     public function execute()
     {
-        $Sku = [];
+        $Skus = [];
         $sku = $this->request->getParam('sku');
         $products = $this->collectionFactory->create();
         $resultJson = $this->resultFactory->create($this->resultFactory::TYPE_JSON);
         $products->addAttributeToFilter('sku', array('like' => '%'.$sku.'%'))->setPageSize(4);
         foreach($products as $product){
-            $Sku[] = $this->productRepository->get($product->getSku())->getData();
+            $Skus[] = $this->productRepository->get($product->getSku())->getData();
         }
-        $resultJson->setData($Sku);
+        $resultJson->setData($Skus);
         return $resultJson;
     }
 }
