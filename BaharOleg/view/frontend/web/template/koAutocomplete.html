@@ -1,0 +1,11 @@
+<div>
+    <input type="text" name="sku" id="search-input" data-bind="textInput: searchText" data-validate='{"required":true}'/>
+    <div class="cool-autocomplete-list">
+        <ul data-bind="foreach: searchResult">
+            <li>
+                <b data-bind="text: $data.sku"></b>
+                <div data-bind="text: $data.name"></div>
+            </li>
+        </ul>
+    </div>
+</div>

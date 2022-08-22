@@ -16,6 +16,9 @@
                 </arguments>
                 <block name="Amasty_BaharOleg.additional" template="Amasty_BaharOleg::additional.phtml"/>
             </block>
+<!--            <block name="Amasty_BaharOleg.test" template="Amasty_BaharOleg::test.phtml">-->
+
+<!--            </block>-->
             </container>
         </referenceContainer>
     </body>
