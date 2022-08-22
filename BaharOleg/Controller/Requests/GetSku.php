@@ -3,10 +3,10 @@
 namespace Amasty\BaharOleg\Controller\Requests;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 
 class GetSku implements ActionInterface
 {
