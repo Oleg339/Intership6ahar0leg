@@ -8,6 +8,7 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Event\ManagerInterface as EventManagerInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Message\ManagerInterface;
@@ -44,13 +45,19 @@ class AddToCart implements ActionInterface
      */
     private  $request;
 
+    /**
+     * @var EventManagerInterface
+     */
+    private $eventManager;
+
     public function __construct(
         ResultFactory $resultFactory,
         Session $checkoutSession,
         ProductRepositoryInterface $productRepository,
         ConfigProvider $configProvider,
         ManagerInterface $messageManager,
-        RequestInterface $request
+        RequestInterface $request,
+        EventManagerInterface $eventManager
     )
     {
         $this->resultFactory=$resultFactory;
@@ -59,6 +66,7 @@ class AddToCart implements ActionInterface
         $this->configProvider=$configProvider;
         $this->messageManager=$messageManager;
         $this->request=$request;
+        $this->eventManager=$eventManager;
     }
 
     /**
@@ -107,6 +115,10 @@ class AddToCart implements ActionInterface
 
         $quote->addProduct($product, $qty);
         $quote->save();
+        $this->eventManager->dispatch(
+            'amasty_baharoleg_addproduct',
+            ['sku' => $sku]
+        );
         $this->messageManager->addSuccessMessage("Готово!");
         return $resultRedirect;
     }

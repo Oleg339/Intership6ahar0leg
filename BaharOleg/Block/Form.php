@@ -6,6 +6,8 @@ use Magento\Framework\View\Element\Template;
 
 class Form extends Template
 {
+    const URL_ACTION = "baharoleg/cart/addtocart";
+
     /**
      * @var \Amasty\BaharOleg\Model\Config\ConfigProvider;
      */
@@ -25,7 +27,12 @@ class Form extends Template
     public function isShowQtyField(){
         return $this->configProvider->getIsShowQtyField();
     }
+
     public function getQtyValue(){
         return $this->configProvider->getQtyValue();
+    }
+
+    public function getFormAction():string{
+        return $this->getUrl(self::URL_ACTION);
     }
 }

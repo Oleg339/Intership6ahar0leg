@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    плагины для 5.1 задания
+    <type name="Amasty\BaharOleg\Block\Form">
+        <plugin name="Amasty_SecondBaharOleg::ChangeFormAction"
+                type="Amasty\SecondBaharOleg\Plugin\BaharOleg\Block\Form\ChangeFormAction" disabled="true"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin name="Amasty_SecondBaharOleg::changeMagentoAddCart"
+                type="Amasty\SecondBaharOleg\Plugin\BaharOleg\Block\Form\ChangeMagentoCartAdd" disabled="true"/>
+    </type>
+        <preference for="\Amasty\BaharOleg\Controller\Index\Index"
+                    type="Amasty\SecondBaharOleg\Preference\BaharOleg\Controller\Index\Index"/>
+</config>

@@ -5,7 +5,7 @@ $qtyValue = $block->getQtyValue();
 ?>
 
 <div>
-    <form action="<?= $block->getUrl('baharoleg/cart/addtocart') ?>" method="GET" data-mage-init='{"validation": {}}'>
+    <form action="<?= $block->getFormAction() ?>" method="POST" data-mage-init='{"validation": {}}'>
         <h3>Sku</h3>
         <div data-bind="scope: 'searchAutocomplete'">
             <!-- ko template: getTemplate() -->

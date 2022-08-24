@@ -4,14 +4,14 @@ namespace Amasty\BaharOleg\Block;
 use Amasty\BaharOleg\Model\Config\ConfigProvider;
 use Magento\Framework\View\Element\Template;
 
-
 class Hello extends Template
 {
     /**
-     * @var \Amasty\BaharOleg\Model\Config\ConfigProvider;
+     * @var ConfigProvider
      */
 
     private $configProvider;
+
 
     public function __construct(
         ConfigProvider $configProvider,
