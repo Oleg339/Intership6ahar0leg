@@ -15,7 +15,7 @@ class ConfigProvider extends ConfigProviderAbstract {
         return $this->getValue('general/welcome_text');
     }
 
-    public function getIsEnabled($storeId = null): bool
+    public function isEnabled($storeId = null): bool
     {
         return $this->getValue('general/enabled');
     }

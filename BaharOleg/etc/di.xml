@@ -2,7 +2,7 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Amasty\SecondBaharOleg\Observer\CheckAddProduct">
-        <plugin name="Amasty_BaharOleg::cancelObserver" disabled="false"
-                type="Amasty\BaharOleg\Plugin\CancelObserver"/>
+        <plugin name="Amasty_BaharOleg::cancelObserver"
+                type="Amasty\BaharOleg\Plugin\CancelObserver" disabled="true"/>
     </type>
 </config>

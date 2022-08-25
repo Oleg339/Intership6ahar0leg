@@ -10,6 +10,6 @@
         <plugin name="Amasty_SecondBaharOleg::changeMagentoAddCart"
                 type="Amasty\SecondBaharOleg\Plugin\BaharOleg\Block\Form\ChangeMagentoCartAdd" disabled="true"/>
     </type>
-        <preference for="\Amasty\BaharOleg\Controller\Index\Index"
-                    type="Amasty\SecondBaharOleg\Preference\BaharOleg\Controller\Index\Index"/>
+<!--        <preference for="\Amasty\BaharOleg\Controller\Index\Index"-->
+<!--                    type="Amasty\SecondBaharOleg\Preference\BaharOleg\Controller\Index\Index"/>-->
 </config>

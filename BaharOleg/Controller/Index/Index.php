@@ -14,7 +14,7 @@ class Index implements ActionInterface
     private $resultFactory;
 
     /**
-     * @var \Amasty\BaharOleg\Model\Config\ConfigProvider;
+     * @var ConfigProvider;
      */
     private $configProvider;
 
@@ -30,7 +30,8 @@ class Index implements ActionInterface
 
     public function execute()
     {
-        if ($this->configProvider->getIsEnabled()) {
+
+        if ($this->configProvider->isEnabled()) {
             return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         } else {
             die('Module is disabled');

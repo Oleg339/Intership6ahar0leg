@@ -2,6 +2,7 @@
 
 namespace Amasty\BaharOleg\Controller\Cart;
 
+use Amasty\BaharOleg\Model\BlacklistSkuRepository;
 use Amasty\BaharOleg\Model\Config\ConfigProvider;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Checkout\Model\Session;
@@ -15,6 +16,11 @@ use Magento\Framework\Message\ManagerInterface;
 
 class AddToCart implements ActionInterface
 {
+    /**
+     * @var BlacklistSkuRepository
+     */
+    private $blacklistSkuRepository;
+
     /**
      * @var ResultFactory
      */
@@ -57,7 +63,8 @@ class AddToCart implements ActionInterface
         ConfigProvider $configProvider,
         ManagerInterface $messageManager,
         RequestInterface $request,
-        EventManagerInterface $eventManager
+        EventManagerInterface $eventManager,
+        BlacklistSkuRepository $blacklistSkuRepository
     )
     {
         $this->resultFactory=$resultFactory;
@@ -67,6 +74,7 @@ class AddToCart implements ActionInterface
         $this->messageManager=$messageManager;
         $this->request=$request;
         $this->eventManager=$eventManager;
+        $this->blacklistSkuRepository = $blacklistSkuRepository;
     }
 
     /**
@@ -78,7 +86,7 @@ class AddToCart implements ActionInterface
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('baharoleg/index/index');
 
-        if (!$this->configProvider->getIsEnabled()) {
+        if (!$this->configProvider->isEnabled()) {
             return $resultRedirect;
         }
 
@@ -88,6 +96,10 @@ class AddToCart implements ActionInterface
         }
 
         $sku = $this->request->getParam('sku');
+        if($sku === null){
+            $this->messageManager->addWarningMessage('Параметр Sku пустой');
+            return $resultRedirect;
+        }
 
         if (!$this->configProvider->getIsShowQtyField()) {
             $qty = 1;
@@ -113,6 +125,36 @@ class AddToCart implements ActionInterface
             return $resultRedirect;
         }
 
+        $blacklistSku = $this->blacklistSkuRepository->getBySku($sku);
+        if($blacklistSku->getData()){
+            $qtyInCart = $quote->getItemByProduct($product);
+            $qtyInCart = $qtyInCart ? $qtyInCart->getQty() : 0;
+            $resultQty = $qty + $qtyInCart;
+            $blacklistSkuQty = $blacklistSku->getQty();
+            if ($blacklistSkuQty >= $resultQty){
+                $this->addProduct($quote, $product, $qty, $sku);
+                return $resultRedirect;
+            }
+            else{
+                $lastQty = $blacklistSkuQty - $qtyInCart;
+                if($lastQty > 0){
+                    $this->addProduct($quote, $product, $lastQty, $sku);
+                    $this->messageManager->addWarningMessage("Qty слишком большой, добавлено только $blacklistSkuQty единиц товара");
+                    return $resultRedirect;
+                }
+                else{
+                    $this->messageManager->addWarningMessage("Qty слишком большой, ничего не добавлено");
+                    return $resultRedirect;
+                }
+
+            }
+        }
+        else{
+            $this->addProduct($quote, $product, $qty, $sku);
+            return $resultRedirect;
+        }
+    }
+    private function addProduct($quote, $product, $qty, $sku){
         $quote->addProduct($product, $qty);
         $quote->save();
         $this->eventManager->dispatch(
@@ -120,6 +162,5 @@ class AddToCart implements ActionInterface
             ['sku' => $sku]
         );
         $this->messageManager->addSuccessMessage("Готово!");
-        return $resultRedirect;
     }
 }
