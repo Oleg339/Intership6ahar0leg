@@ -6,6 +6,7 @@
                 comment="Sku ID"/>
         <column xsi:type="varchar" name="sku" length="255" nullable="false" comment="Sku value"/>
         <column xsi:type="int" name="qty" padding="10" unsigned="true" nullable="false" comment="quantity"/>
+        <column xsi:type="text" name="email_text" nullable="true"/>
         <constraint xsi:type="primary" referenceId="primary">
             <column name="sku_id"/>
         </constraint>

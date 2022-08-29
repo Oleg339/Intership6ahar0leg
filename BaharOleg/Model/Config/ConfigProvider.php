@@ -27,4 +27,13 @@ class ConfigProvider extends ConfigProviderAbstract {
     public function getQtyValue(){
         return $this->getValue('general/qty_default_value');
     }
+
+    public function getTemaplteId(){
+        return $this->getValue('general/email_template');
+    }
+
+    public function getSendEmailTo(){
+        return $this->getValue('general/send_email_to');
+    }
+
 }

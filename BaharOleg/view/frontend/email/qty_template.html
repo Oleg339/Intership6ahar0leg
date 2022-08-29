@@ -1,0 +1,19 @@
+<!--@subject Amasty BaharOleg Qty Notification @-->
+
+<!--@vars
+{
+"var qty":"qty"
+}
+@-->
+
+{{template config_path="design/email/header_template"}}
+<p>
+    {{trans "Qty: %qty" qty=$qty}}
+</p>
+<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+    Пасхалка
+</a>
+
+{{layout handle="amasty_baharoleg_email" qty=$qty area="frontend"}}
+
+{{template config_path="design/email/footer_template"}}

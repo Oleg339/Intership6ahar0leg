@@ -34,4 +34,17 @@ class BlacklistSkuRepository
         $this->blacklistSkuResource->load($blacklistSku, $sku, 'sku');
         return $blacklistSku;
     }
+
+    public function getById(string $Id)
+    {
+        $blacklistSku = $this->blacklistSkuFactory->create();
+        $this->blacklistSkuResource->load($blacklistSku, $Id, 'sku_id');
+        $a = 1;
+        return $blacklistSku;
+    }
+
+    public function save($blacklistSku)
+    {
+        $this->blacklistSkuResource->save($blacklistSku);
+    }
 }
