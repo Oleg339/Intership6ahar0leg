@@ -5,6 +5,7 @@ namespace Amasty\BaharOleg\Cron;
 use Amasty\BaharOleg\Model\BlacklistSkuRepository;
 use Amasty\BaharOleg\Model\Config\ConfigProvider;
 use Magento\Framework\App\Area;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Mail\Template\Factory as EmailTemplateFactory;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Store\Model\StoreManagerInterface;
@@ -52,10 +53,20 @@ class Notify
     }
 
     public function execute(){
+
         $qty = $this->blacklistSkuRepository->getById('1');
-        $vars = [
-            'qty' => $qty->getQty()
-        ];
+        if($qty->getQty() === null){
+            $vars = [
+                'qty' => 'Нет записи с таким id'
+            ];
+        }
+        else{
+            $vars = [
+                'qty' => $qty->getQty()
+            ];
+        }
+
+
         $options = [
             'area' => Area::AREA_FRONTEND,
             'store' => $this->storeManager->getStore()->getId()
@@ -83,5 +94,9 @@ class Notify
             ->getTransport();
 
         $transport->sendMessage();
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/am-log.log');
+        $logger = new \Zend_Log();
+        $logger->addWriter($writer);
+        $logger->info(get_class($this) . '::execute LOG');
     }
 }
