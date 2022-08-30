@@ -39,7 +39,6 @@ class BlacklistSkuRepository
     {
         $blacklistSku = $this->blacklistSkuFactory->create();
         $this->blacklistSkuResource->load($blacklistSku, $Id, 'sku_id');
-        $a = 1;
         return $blacklistSku;
     }
 
