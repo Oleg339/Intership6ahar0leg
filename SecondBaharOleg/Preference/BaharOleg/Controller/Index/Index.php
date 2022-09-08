@@ -2,9 +2,9 @@
 
 namespace Amasty\SecondBaharOleg\Preference\BaharOleg\Controller\Index;
 
-use Amasty\BaharOleg\Controller\Index\Index as firstIndex;
+use Amasty\BaharOleg\Controller\Index\Index as FirstIndex;
 
-class Index extends firstIndex
+class Index extends FirstIndex
 {
     public function execute()
     {
