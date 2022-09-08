@@ -12,7 +12,7 @@ class ChangeMagentoCartAdd
     /**
      * @var ProductRepositoryInterface
      */
-    private $productRepository2;
+    private $productRepository;
 
     /**
      * @var Manager
@@ -20,11 +20,11 @@ class ChangeMagentoCartAdd
     private $messageManager;
 
     public function __construct(
-        ProductRepositoryInterface $productRepository2,
+        ProductRepositoryInterface $productRepository,
         Manager $messageManager
     )
     {
-        $this->productRepository2 = $productRepository2;
+        $this->productRepository = $productRepository;
         $this->messageManager = $messageManager;
     }
 
@@ -32,7 +32,7 @@ class ChangeMagentoCartAdd
         $data = $subject->getRequest()->getParams();
         $sku = $data['sku'];
         try{
-            $product = $this->productRepository2->get($sku);
+            $product = $this->productRepository->get($sku);
         }
         catch(NoSuchEntityException $ex){
             $this->messageManager->addWarningMessage('Нет такого продукта!');
